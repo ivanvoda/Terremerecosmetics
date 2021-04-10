@@ -1,0 +1,366 @@
+<style>
+    #talon-product-view-area {
+        margin: 30px 0;
+    }
+
+    #talon-section-title {
+        text-align: center;
+        padding-bottom: 1em;
+    }
+    .talon-product-item {
+        text-align:  center;
+        display: inline-table;
+        margin: 0px 15px;
+        width: 160px;
+    }
+
+    .talon-img {
+        display: inline-block;
+    }
+
+    .talon-wraptocenter {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        max-height: 160px;
+        max-width: 160px;
+    }
+
+    .talon-wraptocenter * {
+        vertical-align: middle;
+    }
+
+    .talon-hidden {
+        display: none;
+    }
+
+    .talon-wraptocenter > img
+    {
+        max-height: 160px;
+        max-width: 160px;
+    }
+
+    #talon-product-group-wrapper
+    {
+        width:100%;
+        text-align:center;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        position: relative;
+    }
+    #talon-product-group {
+        width: 2000px;
+        text-align: center;
+        display: table;
+        margin: 0px auto;
+
+    }
+    .talon-arrow {
+        position: absolute;
+        display:inline-block;
+        height: 100%;
+    }
+    .talon-arrow-left {
+        left:0;
+    }
+    .talon-arrow-right {
+        right:0
+    }
+
+    .talon-arrow-inner
+    {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    @media (max-width: 768px) {
+        #talon-product-group-wrapper {
+            overflow-x: scroll;
+
+        }
+         #talon-product-group-wrapper::-webkit-scrollbar{
+            height: 3px;
+         }
+
+         #talon-product-group-wrapper::-webkit-scrollbar-track{
+            background: rgba(255,255,255,0);
+        }
+
+         #talon-product-group-wrapper::-webkit-scrollbar-thumb{
+            background: rgba(0,0,0,0.5);
+        }
+    }
+
+
+    
+#talon-product-view-area
+{
+}
+#talon-section-title
+{
+
+}
+#talon-product-group
+{
+}
+.talon-product-item
+{
+}
+.talon-product-title
+{
+}
+.talon-product-price
+{
+}
+
+
+</style>
+<div id="talon-product-view-area" class="talon-hidden">
+    <h3 id="talon-section-title">
+        Recently Viewed
+    </h3>
+
+    <div id="talon-product-group-wrapper">
+       <!-- <div class="talon-arrow talon-arrow-left"><div class="talon-arrow-inner">}</div></div>
+        <div class="talon-arrow talon-arrow-right"><div class="talon-arrow-inner">}</div></div>-->
+        <div id="talon-product-group"></div>
+    </div>
+</div>
+<script>
+
+    window.talonRecentViewOptions = {
+        centerItems: "center" == 'center',
+        showProductPrice: "True" == "True",
+        showProductTitle: "True" == "True",
+        maxProductsRemember: 16,
+        mobileSizeStarts: 768,
+        productQueryUrl: 'https://taloncommerce.com/recently_viewed/get_products_changed/',
+        shopDomain: "{{ shop.permanent_domain }}",
+        addBarToPage: "True" == "True" || {% if product %}false{% else %}true{% endif %},
+        currentProduct:
+                {% if product %}
+        {
+            {% if product.featured_image %}
+                {% assign product_img = product.featured_image %}
+                {% elsif  product.images %}
+                {% assign product_img = product.images[0]  %}
+            {% endif %}
+            "img": "{{ product_img.src |img_url: 'compact' }}",
+            "title": "{{ product.title | replace: '"', '\"' }}",
+            "price": "{{ product.price | money  }}",
+            "url": "{{ product.url | within: collection }}",
+            "id": "{{product.id}}",
+            "updated": new Date()
+        },
+            {% else %}
+                null
+            {% endif %}
+    }
+
+
+
+
+
+    talonStart = function(jQuery)
+    {
+        function sizeItemGroup() {
+
+                var widthByAmount = jQuery(".talon-product-item").length * jQuery(".talon-product-item").outerWidth(true);
+
+
+                jQuery("#talon-product-group").css("width", widthByAmount)
+
+            }
+
+        if (!String.prototype.format) {
+            String.prototype.format = function () {
+                var args = arguments;
+                return this.replace(/{(\d+)}/g, function (match, number) {
+                    return typeof args[number] != 'undefined'
+                            ? args[number]
+                            : match
+                            ;
+                });
+            };
+        }
+        if (!Array.prototype.move) {
+            Array.prototype.move = function (from, to) {
+                this.splice(to, 0, this.splice(from, 1)[0]);
+            };
+        }
+
+        const MAX_PRODUCTS_REMEMBER = 16;
+        const MOBILE_SIZE_STARTS = 768;
+        const CENTER_ITEMS = window.talonRecentViewOptions.centerItems;
+        const SHOW_PRODUCT_PRICE =  window.talonRecentViewOptions.showProductPrice;
+        const SHOW_PRODUCT_TITLE =  window.talonRecentViewOptions.showProductTitle
+        var currentProduct = window.talonRecentViewOptions.currentProduct
+
+        var recentlyViewed = [];
+        try {
+            recentlyViewed = JSON.parse(localStorage.getItem("talon-recently-viewed"))
+        }
+        catch (e) {
+            recentlyViewed = [];
+        }
+
+        if (!Array.isArray(recentlyViewed)) {
+            recentlyViewed = []
+        }
+
+
+        if (currentProduct) {
+
+            var i = recentlyViewed.length;
+            while(i--) {
+
+                var product = recentlyViewed[i]
+                if (product.id == currentProduct.id) {
+                    recentlyViewed.splice(i, 1)//remove existing
+                    break;
+                }
+            }
+
+            recentlyViewed.splice(0, 0, currentProduct)
+
+
+            if (recentlyViewed.length > MAX_PRODUCTS_REMEMBER) {
+                recentlyViewed = recentlyViewed.slice(0, MAX_PRODUCTS_REMEMBER)
+
+            }
+
+            localStorage.setItem("talon-recently-viewed", JSON.stringify(recentlyViewed))
+
+        }
+
+        var product_ids = []
+
+        for (var product_idx  in recentlyViewed) {
+            product_ids.push(recentlyViewed[product_idx].id)
+        }
+        if (product_ids.length > 0 && window.talonRecentViewOptions.addBarToPage) {
+            jQuery.get(window.talonRecentViewOptions.productQueryUrl + '?product_ids=' + encodeURI(product_ids.join(",")) + "&shop_url=" + encodeURI(window.talonRecentViewOptions.shopDomain),
+                    function (data) {
+
+                        if (data == "invalid")
+                            return;
+                        var settings_updated = new Date(data.settings_updated)
+
+
+                        var prodIndex = recentlyViewed.length;
+                        while(prodIndex--)
+                        {
+
+                            var prod = recentlyViewed[prodIndex]
+                            var browser_prod_update = new Date(prod.updated);
+                            var remove = false
+
+                            if (browser_prod_update < settings_updated) {
+                                remove = true
+                            }
+
+                            for (var updateIndex = 0; updateIndex < data.products_updated.length; ++updateIndex) {
+                                var update = data.products_updated[updateIndex]
+
+
+                                var prod_updated = new Date(update.updated)
+
+
+                                if (update.id == prod.id && browser_prod_update < prod_updated) {
+
+                                    remove = true
+                                }
+                            }
+
+                            if (remove) {
+
+                                recentlyViewed.splice(prodIndex, 1)
+                            }
+                        }
+                        var num_eles = 0;
+
+                        if (jQuery("#talon-product-group").children().length == 0) {
+                            for (var i = 0; i < recentlyViewed.length; ++i) {
+                                var wrapperWidth = jQuery("#talon-product-group-wrapper").width()
+                                var item = jQuery(".talon-product-item");
+                                var outerWidth = item.outerWidth(true);
+                                var marginWidth = outerWidth - item.outerWidth()
+                                var widthByAmount = ((1 + item.length) * outerWidth) - marginWidth;
+
+                                if (wrapperWidth > MOBILE_SIZE_STARTS && wrapperWidth < widthByAmount) {
+                                    break
+                                }
+
+                                var product = recentlyViewed[i]
+
+                                if((!product.hasOwnProperty('img')) || product.img == "")
+                                {
+                                    product.img = "https://taloncommerce.com/static/images/pixel.png"
+                                }
+
+                                if (currentProduct == null || product.id != currentProduct.id) {
+                                    var element =
+                                            ('<div class="talon-product-item"><a href="{0}"><div class="talon-img">' +
+                                            '<div class="talon-wraptocenter"><span></span><img src="{1}" >' +
+                                            '</div></div>').format(product.url, product.img)
+
+                                    if (SHOW_PRODUCT_TITLE)
+                                        element += '<div class="talon-product-title">{0}</div>'.format(product.title);
+
+                                    if (SHOW_PRODUCT_PRICE)
+                                        element += '<div class="talon-product-price">{0}</div>'.format(product.price)
+
+                                    element += '</a></div>'
+
+                                    jQuery("#talon-product-group").append(element)
+                                    jQuery("#talon-product-view-area").removeClass("talon-hidden")
+                                }
+                            }
+                            sizeItemGroup();
+                        }
+                    })
+        }
+
+
+    jQuery(window).on("load", sizeItemGroup);
+    jQuery(window).on("resize", sizeItemGroup);
+
+    }
+
+function loadScript(url, callback){
+
+    var script = document.createElement("script")
+    script.type = "text/javascript";
+
+    if (script.readyState){  //IE
+        script.onreadystatechange = function(){
+            if (script.readyState == "loaded" ||
+                    script.readyState == "complete"){
+                script.onreadystatechange = null;
+                callback();
+            }
+        };
+    } else {  //Others
+        script.onload = function(){
+            callback();
+        };
+    }
+
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+}
+
+
+if ((typeof jQuery === 'undefined') || (parseFloat(jQuery.fn.jquery) < 1.7)) {
+  loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', function(){
+    jQuery191 = jQuery.noConflict(true);
+    talonStart(jQuery191);
+  });
+} else {
+  talonStart(jQuery);
+}
+
+
+
+</script>

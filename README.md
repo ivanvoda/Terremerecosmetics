@@ -1,2 +1,0 @@
-# terremerecosmetics
-Shopify Theme customization

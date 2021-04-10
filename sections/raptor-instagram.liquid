@@ -1,0 +1,25 @@
+<div class="shopify-section index-section">
+<div id="raptor_container">
+{{ section.settings.linktext }}
+</div>
+</div>
+{% schema %}
+{
+  "name": "Raptor Instagram Widget",
+  "settings": [
+
+    {
+      "id": "linktext",
+      "type": "html",
+      "label": "Embed code",
+      "default": "<div id='rap__med__instagram'></div><script async src='https://theraptormedia.com/instagram/embed.js' data-id='terre-mere-cosmetics.myshopify.com'  defer='defer'></script>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Raptor Instagram Widget",
+      "category": "Instagram section by Raptor"
+    }
+  ]
+}
+{% endschema %}

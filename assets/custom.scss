@@ -1,0 +1,267 @@
+$container: 1200px;
+
+$x-lg-height: 1200px;
+$x-lg-mob-height: 1000px;
+$lg-height: 1000px;
+$lg-mob-height: 800px;
+$medium-height: 800px;
+$medium-mob-height: 555px;
+$sm-height: 500px;
+$sm-mob-height: 500px;
+$xs-height: 350px;
+$xs-mob-height: 350px;
+
+$font-lg-title-size: 64px;
+$font-md-title-size: 50px;
+$font-lg-txt-size: 24px;
+$font-md-txt-size: 20px;
+
+$font-lg-title-mobile-size: 40px;
+$font-md-title-mobile-size: 30px;
+$font-lg-txt-mobile-size: 18px;
+$font-md-txt-mobile-size: 16px;
+
+$margin: 50px;
+$mob-margin: 20px;
+
+@media (max-width: 640px) {
+    .hide--desktop {
+        display: block !important;
+    }
+    .hide--mobile {
+        display: none !important;
+    }
+}
+@media (min-width: 641px) {
+    .hide--desktop {
+        display: none !important;
+    }
+    .hide--mobile {
+        display: block !important;
+    }
+}
+body.template-collection {
+    #store-messages {
+        border: 0px;
+    }
+    #shopify-section-header {
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        #pageheader {
+            background: transparent;
+        }
+        #main-nav {
+            border: 0px;
+            .multi-level-nav {
+                & > div {
+                    background: transparent;
+                    border: 0px;
+                }
+            }
+        }
+    }
+}
+
+#shopify-section-hero {
+    .global-hero {
+        position: relative;
+        overflow: hidden;
+        &.full_width {
+            max-width: 100%;
+        }
+        &.fixed_width {
+            max-width: $container;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        &.adapt {
+            height: 100%;
+        }
+        &.x-small {
+            img {
+                height: $xs-height;
+                @media (max-width: 640px) {
+                    height: $xs-mob-height;
+                }    
+            }
+            height: $xs-height;
+            @media (max-width: 640px) {
+                height: $xs-mob-height;
+            }
+        }
+        &.small {
+            img {
+                height: $sm-height;
+                @media (max-width: 640px) {
+                    height: $sm-mob-height;
+                }    
+            }
+            height: $sm-height;
+            @media (max-width: 640px) {
+                height: $sm-mob-height;
+            }
+        }
+        &.medium {
+            img {
+                height: $medium-height;
+                @media (max-width: 640px) {
+                    height: $medium-mob-height;
+                }    
+            }
+            height: $medium-height;
+            @media (max-width: 640px) {
+                height: $medium-mob-height;
+            }
+        }
+        &.large {
+            img {
+                height: $lg-height;
+                @media (max-width: 640px) {
+                    height: $lg-mob-height;
+                }    
+            }
+            height: $lg-height;
+            @media (max-width: 640px) {
+                height: $lg-mob-height;
+            }
+        }
+        &.x-large {
+            img {
+                height: $x-lg-height;
+                @media (max-width: 640px) {
+                    height: $x-lg-mob-height;
+                }    
+            }
+            height: $x-lg-height;
+            @media (max-width: 640px) {
+                height: $x-lg-mob-height;
+            }
+        }
+        .global-hero__image-wrapper {
+            img {
+               width: 100%;
+                object-fit: cover;
+            }
+            // height: 0;
+            // position: relative;
+            // img {
+            //     position: absolute;
+            //     height: 100%;
+            //     top: 50%;
+            //     left: 50%;
+            //     transform: translate(-50%, -50%);
+            // }
+        }
+        .global-hero__body {
+            margin-top: 92px;
+            position: absolute;
+            &.top.left {
+                top: $margin;
+                left: $margin;
+                @media (max-width: 640px) {
+                    top: $mob-margin;
+                    left: $mob-margin;
+                }
+            }
+            &.top.center {
+                top: $margin;
+                left: 50%;
+                transform: translateX(-50%);
+                @media (max-width: 640px) {
+                    top: $mob-margin;
+                }
+            }
+            &.top.right {
+                top: $margin;
+                right: $margin;
+                @media (max-width: 640px) {
+                    top: $mob-margin;
+                    right: $mob-margin;
+                }
+            }
+            &.middle.left {
+                top: 50%;
+                transform: translateY(-50%);
+                left: $margin;
+                @media (max-width: 640px) {
+                    left: $mob-margin;
+                }
+            }
+            &.middle.center {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            &.middle.right {
+                top: 50%;
+                transform: translateY(-50%);
+                right: $margin;
+                @media (max-width: 640px) {
+                    right: $mob-margin;
+                }
+            }
+            &.bottom.left {
+                bottom: $margin;
+                left: $margin;
+                @media (max-width: 640px) {
+                    left: $mob-margin;
+                }
+            }
+            &.bottom.center {
+                bottom: $margin;
+                left: 50%;
+                transform: translateX(-50%);
+                @media (max-width: 640px) {
+                    bottom: $mob-margin;
+                }
+            }
+            &.bottom.right {
+                bottom: $margin;
+                right: $margin;
+                @media (max-width: 640px) {
+                    bottom: $mob-margin;
+                    right: $mob-margin
+                }
+            }
+            .global-hero__title {
+                &.medium {
+                    font-size: $font-md-title-size;
+                    @media (max-width: 640px) {
+                        font-size:  $font-md-title-mobile-size;
+                    }
+                }
+                &.large {
+                    font-size: $font-lg-title-size;
+                    @media (max-width: 640px) {
+                        font-size:  $font-lg-title-mobile-size;
+                    }
+                }
+            }
+            .global-hero__text {
+                font-weight: inherit;
+                p {
+                    text-align: right;
+                    line-height: 1.2;
+                }
+                strong {
+                    font-weight: inherit;
+                    display: block;
+                }
+                &.medium {
+                    font-size: $font-md-txt-size;
+                    @media (max-width: 640px) {
+                        font-size:  $font-md-txt-mobile-size;
+                    }
+                }
+                &.large {
+                    font-size: $font-lg-txt-size;
+                    @media (max-width: 640px) {
+                        font-size:  $font-lg-txt-mobile-size;
+                    }
+                }
+            }
+        }
+    }
+}
+

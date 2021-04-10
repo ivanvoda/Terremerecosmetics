@@ -1,0 +1,51 @@
+<div class="social-links">
+  <ul>
+    {% if settings.social_twitter_url != blank %}
+    <li><a title="Twitter" class="twitter" target="_blank" href="{{ settings.social_twitter_url }}">{% include 'svg-twitter' %}</a></li>
+    {% endif %}
+    {% if settings.social_facebook_url != blank %}
+    <li><a title="Facebook" class="facebook" target="_blank" href="{{ settings.social_facebook_url }}">{% include 'svg-facebook' %}</a></li>
+    {% endif %}
+    {% if settings.social_tumblr_url != blank %}
+    <li><a title="Tumblr" class="tumblr" target="_blank" href="{{ settings.social_tumblr_url }}">{% include 'svg-tumblr' %}</a></li>
+    {% endif %}
+    {% if settings.social_youtube_url != blank %}
+    <li><a title="Youtube" class="youtube" target="_blank" href="{{ settings.social_youtube_url }}">{% include 'svg-youtube' %}</a></li>
+    {% endif %}
+    {% if settings.social_vimeo_url != blank %}
+    <li><a title="Vimeo" class="vimeo" target="_blank" href="{{ settings.social_vimeo_url }}">{% include 'svg-vimeo' %}</a></li>
+    {% endif %}
+    {% if settings.social_instagram_url != blank %}
+    <li><a title="Instagram" class="instagram" target="_blank" href="{{ settings.social_instagram_url }}">{% include 'svg-instagram' %}</a></li>
+    {% endif %}
+    {% if settings.social_pinterest_url != blank %}
+    <li><a title="Pinterest" class="pinterest" target="_blank" href="{{ settings.social_pinterest_url }}">{% include 'svg-pinterest' %}</a></li>
+    {% endif %}
+    {% if settings.social_google_url != blank %}
+    <li><a title="Google+" class="google" target="_blank" href="{{ settings.social_google_url }}">{% include 'svg-google-plus' %}</a></li>
+    {% endif %}
+    {% if settings.social_rss_url != blank %}
+    <li><a title="RSS" class="rss" target="_blank" href="{{ settings.social_rss_url }}">{% include 'svg-rss' %}</a></li>
+    {% endif %}
+  </ul>
+  <p class="toptexty"><span>VEGAN & Cruelty-Free</span><br>Free Standard Shipping & Free Returns!</p>
+  
+</div>
+<style>p.toptexty {
+   margin-top: -3px;
+    font-size: 13px;
+    color: #925f6e;
+    padding-left: 10px;
+    font-family: Roboto Condensed;
+    line-height: 16px;
+}
+  p.toptexty span{color:#000;}
+#pageheader .utils .cart-summary {
+   
+    margin-top: -26px;
+}
+  .nav-row .tier-2 a {    padding: 0px 18px;}
+  
+  .nav-row .multi-level-nav .tier-2 {
+    padding: 0px 0;}
+</style>
