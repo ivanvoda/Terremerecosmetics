@@ -12,10 +12,10 @@
     
     <div class="global-hero__body {{section.settings.alignment}}">
       {%- if section.settings.title != blank -%}
-        <h1 class="global-hero__title {{ section.settings.text_size }}">{{ section.settings.title | escape }}</h1>
+        <h1 class="global-hero__title {{ section.settings.text_size }}" style="color: {{ section.settings.text_color }}">{{ section.settings.title | escape }}</h1>
       {%- endif -%}
       {% if section.settings.text != blank %}
-        <div class="global-hero__text {{ section.settings.text_size }}">{{ section.settings.text }}</div>
+        <div class="global-hero__text {{ section.settings.text_size }}" style="color: {{ section.settings.text_color }}">{{ section.settings.text }}</div>
       {% endif %}
     </div>
 </section>
