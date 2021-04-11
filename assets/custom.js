@@ -1,24 +1,26 @@
 $(document).ready(function($) {
-    $('.slider').slick({
+    $('[data-product-slider]').slick({
       dots: false,
       infinite: true,
       speed: 500,
-      slidesToShow: 3,
+      slidesToShow: 4,
       slidesToScroll: 1,
       autoplay: true,
       autoplaySpeed: 2000,
       arrows: true,
+      prevArrow: '<span><</span>',
+      nextArrow: '<span>></span>',
       responsive: [{
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1
         }
       },
       {
-         breakpoint: 400,
+         breakpoint: 600,
          settings: {
-            arrows: false,
+            arrows: true,
             slidesToShow: 1,
             slidesToScroll: 1
          }

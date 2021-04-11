@@ -61,12 +61,14 @@
     <div class="product__slider" data-product-slider>
     {% for block in section.blocks %}
         {% if block.type == 'product' %}
-            {% assign bs = block.settings %}
-            <div class="product-image__warraper">
-                <img src="{{ all_products[bs.block_product].featured_image | img_url: '400x' }}" alt='image' />
-            </div>
-            <div class="product-item__title">
-                {{ all_products[bs.block_product].title }}
+            <div class="product-slider__item">
+                {% assign bs = block.settings %}
+                <div class="product-image__warraper" style="padding-top: {{ 100.0 | times: all_products[bs.block_product].featured_image.aspect_ratio }}%">
+                    <img src="{{ all_products[bs.block_product].featured_image | img_url: '400x' }}" alt='image' />
+                </div>
+                <div class="product-item__title">
+                    {{ all_products[bs.block_product].title }}
+                </div>
             </div>
         {% endif %}
     {% endfor %}
