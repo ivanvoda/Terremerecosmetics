@@ -2,10 +2,157 @@
     {% for product__item in collection.products limit: 5 %}
         <div class="grid__item">
             <div class="image__wraper" style="padding-top: {{ 100.0 | times: product__item.featured_image.aspect_ratio }}%">
-                <img style="max-width: {% if forloop.index == 3 %}{{ 50.0 | times: product__item.featured_image.aspect_ratio }}{% else %}{{ 100.0 | times: product__item.featured_image.aspect_ratio }}{% endif %}%" src="{{ product__item.featured_image | img_url: '1000x' }}" />
+                <img style="max-width: {% if forloop.index == 3 %}30{% else %}60{% endif %}%" src="{{ product__item.featured_image | img_url: '1000x' }}" />
             </div>
             <div class="grid_title">{{ product__item.title }}</div>
         </div>
     {% endfor %}
 </div>
-<div class=""></div>
+<div class="image__text" style="background: url('{{ collection.metafields.global.background_image }}')">
+    {% assign images = collection.metafields.global.image %}
+    {% if images != blank %}
+        {% for image_item in images %}
+            <div class="image-text__item">
+                <div class="img__wrapper">
+                    <img src="{{ image_item }}" alt="image" />
+                    <div class="text__content">
+                        <div class="title">{{ collection.metafields.global.title[forloop.index0] }}</div>
+                        <div class="text">{{ collection.metafields.global.text[forloop.index0] }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+<div class="block__content">
+    <div class="block__title">{{ section.settings.block_title }}</div>
+    <div class="block__items">
+        {% for block in section.blocks %}
+            {% if block.type == 'text' %}
+            <div class="block__item">
+                {% assign bs = block.settings %}
+                <div class="block-item__title">{{ bs.block_item_title }}</div>
+                <div class="block-item__text">
+                    {{ bs.block_item_text }}
+                    {% assign button_url = bs.block_item_button_url | default: '#' %}
+                    <a href="{{ button_url }}">{{ bs.block_item_button_label }}</a>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+        <div class="block__item">
+            {% assign ss = section.settings %}
+            <div class="block-text__content">
+                <div class="block-item__title">{{ ss.block_item_title }}</div>
+                <div class="block-item__text">
+                    {{ ss.block_item_text }}
+                    {% assign button_url = ss.block_item_button_url | default: '#' %}
+                    <a href="{{ button_url }}">{{ ss.block_item_button_label }}</a>
+                </div>
+            </div>
+            <div class="block-item__image">
+                <img src="{{ ss.block_item_image | img_url: '500x' }}" alt="image" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="block-product__content">
+    <div class="block__title">{{ section.settings.product_item_title }}</div>
+    <div class="product__slider" data-product-slider>
+    {% for block in section.blocks %}
+        {% if block.type == 'product' %}
+            {% assign bs = block.settings %}
+            <div class="product-image__warraper">
+                <img src="{{ all_products[bs.block_product].featured_image | img_url: '400x' }}" alt='image' />
+            </div>
+            <div class="product-item__title">
+                {{ all_products[bs.block_product].title }}
+            </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+</div>
+{% schema %}
+  {
+    "name": "Collection Pages",
+    "settings": [{
+        "type": "text",
+        "id": "block_title",
+        "label": "Block Title"
+    },{
+        "type": "text",
+        "id": "block_item_title",
+        "label": "Block Item Title"
+    },
+    {
+        "type": "text",
+        "id": "block_item_text",
+        "label": "Block Item Text"
+    },
+    {
+        "type": "text",
+        "id": "block_item_button_label",
+        "label": "Block Item Buttin Label"
+    },
+    {
+        "type": "url",
+        "id": "block_item_button_url",
+        "label": "Block Item Button Url"
+    },
+    {
+        "type": "image_picker",
+        "id": "block_item_image",
+        "label": "Block Item Image"
+    },
+    {
+        "type": "header",
+        "content": "Product Item Title"
+    },
+    {
+        "type": "text",
+        "id": "product_item_title",
+        "label": "Product Item Title"
+    }
+    ],
+    "blocks":[
+        {
+            "type": "text",
+            "name": "Text",
+            "settings":[
+                {
+                    "type": "text",
+                    "id": "block_item_title",
+                    "label": "Block Item Title"
+                },
+                {
+                    "type": "text",
+                    "id": "block_item_text",
+                    "label": "Block Item Text"
+                },
+                {
+                    "type": "text",
+                    "id": "block_item_button_label",
+                    "label": "Block Item Buttin Label"
+                },
+                {
+                    "type": "url",
+                    "id": "block_item_button_url",
+                    "label": "Block Item Button Url"
+                }
+            ]
+         },
+         {
+            "type": "product",
+            "name": "Product",
+            "settings":[
+                {
+                    "type": "product",
+                    "id": "block_product",
+                    "label": "Block Product Item"
+                }
+            ]
+         }
+     ]
+    
+  }
+  {% endschema %}
