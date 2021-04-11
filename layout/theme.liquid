@@ -27,6 +27,7 @@
   {% include 'google-fonts-import' %}
   
   {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'slick.css' | asset_url | stylesheet_tag }}
   {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
   
   {% if template contains 'customers' %}
@@ -92,6 +93,7 @@
   
   {{ 'vendor.js'  | asset_url | script_tag }}
   {{ 'theme.js'  | asset_url | script_tag }}
+  {{ 'jquery.1.1.3.js'  | asset_url | script_tag }}
   
   {% include 'currencies' %}
   
