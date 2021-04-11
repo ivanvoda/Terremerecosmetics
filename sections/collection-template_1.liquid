@@ -2,9 +2,10 @@
     {% for product__item in collection.products limit: 5 %}
         <div class="grid__item">
             <div class="image__wraper" style="padding-top: {{ 100.0 | times: product__item.featured_image.aspect_ratio }}%">
-                <img src="{{ product__item.featured_image | img_url: '1000x' }}" />
+                <img style="max-width: {% if forloop.index == 3 %}{{ 50.0 | times: product__item.featured_image.aspect_ratio }}{% else %}{{ 100.0 | times: product__item.featured_image.aspect_ratio }}{% endif %}%" src="{{ product__item.featured_image | img_url: '1000x' }}" />
             </div>
             <div class="grid_title">{{ product__item.title }}</div>
         </div>
     {% endfor %}
 </div>
+<div class=""></div>

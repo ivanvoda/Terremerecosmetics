@@ -1,0 +1,9 @@
+{%- assign img_url = img | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+<img class="image-fit hero__image lazyload"
+    src1="{{img}}"
+    data-src="{{ img_url }}"
+    data-aspectratio="{{ img.aspect_ratio }}"
+    data-sizes="auto"
+    data-parent-fit="cover"
+    alt="{{ img.alt | escape }}"
+     >

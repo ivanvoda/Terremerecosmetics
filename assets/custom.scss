@@ -106,12 +106,12 @@ body.template-collection {
             img {
                 height: 100vh;
                 @media (max-width: 640px) {
-                    height: 100vh;
+                    height: $medium-mob-height;
                 }    
             }
             height: 100vh;
             @media (max-width: 640px) {
-                height: 100vh;
+                height: $medium-mob-height;
             }
         }
         &.large {
@@ -276,14 +276,21 @@ body.template-collection {
             position: relative;
             .image__wraper {
                 position: relative;
-                height: 0;
-                img {
-                    height: 100%;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
+                @media (min-width: 641px) {
+                    padding-top: unset !important;
                 }
+                @media (max-width: 640px) {
+                    height: 0;
+                    img {
+                        max-width: 100% !important;
+                        height: 100%;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+                
             }
             .grid_title {
                 position: absolute;
@@ -310,7 +317,7 @@ body.template-collection {
         }
         & .grid__item:nth-child(2) {
             .grid_title {
-                left: 10%;
+                left: 50%;
                 top: 50%;
                 transform: translateY(-50%);
                 max-width: 20%;
@@ -321,6 +328,9 @@ body.template-collection {
         & .grid__item:nth-child(3) {
             grid-column-start: 1;
             grid-column-end: 3;
+            .image__wraper {
+                text-align: center;
+            }
             @media (max-width: 640px) {
                 grid-column-end: 1;
             }
@@ -335,16 +345,16 @@ body.template-collection {
         }
         & .grid__item:nth-child(4) {
             .grid_title {
-                left: 20%;
+                left: 13%;
                 top: 20%;
-                max-width: 13%;
+                max-width: 10%;
                 text-align: center;
                 line-height: 1.4;
             }
         }
         & .grid__item:nth-child(5) {
             .grid_title {
-                right: 10%;
+                left: 50%;
                 top: 20%;
                 max-width: 13%;
                 text-align: center;
