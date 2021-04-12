@@ -2,7 +2,7 @@
     {% for product__item in collection.products limit: 5 %}
         <div class="grid__item">
             <div class="image__wraper" style="padding-top: {{ 100.0 | times: product__item.featured_image.aspect_ratio }}%">
-                <img style="max-width: {% if forloop.index == 3 %}30{% else %}60{% endif %}%" src="{{ product__item.featured_image | img_url: '1000x' }}" />
+                <img src="{{ product__item.featured_image | img_url: '1000x' }}" />
             </div>
             <div class="grid_title">{{ product__item.title }}</div>
         </div>
@@ -13,12 +13,12 @@
     {% if images != blank %}
         {% for image_item in images %}
             <div class="image-text__item">
+                <div class="text__content">
+                    <div class="title">{{ collection.metafields.global.title[forloop.index0] }}</div>
+                    <div class="text">{{ collection.metafields.global.text[forloop.index0] }}</div>
+                </div>
                 <div class="img__wrapper">
                     <img src="{{ image_item }}" alt="image" />
-                    <div class="text__content">
-                        <div class="title">{{ collection.metafields.global.title[forloop.index0] }}</div>
-                        <div class="text">{{ collection.metafields.global.text[forloop.index0] }}</div>
-                    </div>
                 </div>
             </div>
         {% endfor %}
