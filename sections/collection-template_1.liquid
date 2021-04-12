@@ -8,7 +8,7 @@
         </div>
     {% endfor %}
 </div>
-<div class="image__text" style="background: url('{{ collection.metafields.global.background_image }}')">
+<div class="image__text" style="background-image: url('{{ collection.metafields.global.background_image }}')">
     {% assign images = collection.metafields.global.image %}
     {% if images != blank %}
         {% for image_item in images %}

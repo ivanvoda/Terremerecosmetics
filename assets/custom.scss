@@ -406,17 +406,19 @@ body.template-collection {
     .image__text {
         background-repeat: no-repeat !important;
         background-color: #e3dee5 !important;
-        padding-top: 60px;
-        
+        padding-top: 100px;
+        padding-bottom: 50px;
+        background-position-y: center;
+        background-size: 250%;
         .image-text__item {
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: white;
-            max-width: 690px;
+            max-width: 750px;
             margin-left: auto;
             margin-right: auto;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             -webkit-box-shadow: -13px 13px 18px 5px rgba(0,0,0,0.2); 
             box-shadow: -13px 13px 18px 5px rgba(0,0,0,0.2);
             .img__wrapper {
@@ -424,6 +426,11 @@ body.template-collection {
                 max-width: fit-content;
                 min-width: 20%;
                 flex: 1;
+                img {
+                    position: absolute;
+                    top: -73px;
+                    right: -8px;
+                }
             }
             .text__content {
                 text-align: right;
@@ -431,16 +438,15 @@ body.template-collection {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                padding-right: 15px;
-                padding-left: 15px;
+                padding: 15px;
                 .title {
                     color: #3f2c42;
-                    font-size: 25px;
+                    font-size: 1.7vw;
                     line-height: 1.6;
                 }
                 .text {
-                    font-size: 16px;
-                    line-height: 1;
+                    font-size: 1vw;
+                    line-height: 1.2;
                 }
             }
         }
@@ -455,7 +461,7 @@ body.template-collection {
             margin-left: auto;
             margin-right: auto;
             position: relative;
-            font-size: 26px;
+            font-size: 1.7vw;
             color: #3f2c42;
             margin-bottom: 50px;
             font-weight: 300;
@@ -480,7 +486,7 @@ body.template-collection {
             }
         }
         .block__items {
-            max-width: 690px;
+            max-width: 750px;
             margin-left: auto;
             margin-right: auto;
             display: grid;
@@ -499,12 +505,12 @@ body.template-collection {
                 position: relative;
                 .block-item__title {
                     text-align: center;
-                    font-size: 24px;
+                    font-size: 1.7vw;
                     color: #1f0c20;
                     line-height: 1.2;
                 }
                 .block-item__text {
-                    font-size: 18px;
+                    font-size: 1.1vw;
                     line-height: 1.2;
                     margin-top: 10px;
                     a {
@@ -551,6 +557,7 @@ body.template-collection {
         }
     }
     .block-product__content {
+        padding-top: 100px;
         .block__title {
             width: fit-content;
             margin-left: auto;
